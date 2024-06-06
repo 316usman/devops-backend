@@ -34,6 +34,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           port: 22
+          known_hosts: /dev/null
           script: |
             docker pull 316usman/flask-app:latest
             docker stop flask-container || true
