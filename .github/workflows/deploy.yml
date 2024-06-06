@@ -27,19 +27,6 @@ jobs:
           docker build -t 316usman/flask-app:latest .
           docker push 316usman/flask-app:latest
 
-      # - name: SSH to EC2 and deploy
-      #   uses: appleboy/ssh-action@v0.1.4
-      #   with:
-      #     host: ${{ secrets.EC2_HOST }}
-      #     username: ${{ secrets.EC2_USER }}
-      #     key: ${{ secrets.EC2_KEY }}
-      #     debug: true
-      #     port: 22
-      #     script: |
-      #       docker pull 316usman/flask-app:latest
-      #       docker stop flask-container || true
-      #       docker rm flask-container || true
-      #       docker run -d -p 4000:4000 --name flask-container 316usman/flask-app:latest
       - name: Start SSH agent
         uses: webfactory/ssh-agent@v0.6.0
 
