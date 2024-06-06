@@ -26,7 +26,8 @@ jobs:
         run: |
           docker build -t 316usman/flask-app:latest .
           docker push 316usman/flask-app:latest
-
+      - name: Print runner IP
+        run: echo "::set-output name=ip::$(dig +short myip.opendns.com @resolver1.opendns.com)"
       - name: SSH to EC2 and deploy
         uses: appleboy/ssh-action@v0.1.4
         with:
