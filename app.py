@@ -13,6 +13,7 @@ DB_NAME = os.environ.get('DB_NAME', 'default_dbname')
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+
 db = SQLAlchemy(app)
 
 class Data(db.Model):
