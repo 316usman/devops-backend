@@ -14,7 +14,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{DB_USERNAME}:{DB_PASS
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
-
 db = SQLAlchemy(app)
 
 class Data(db.Model):
