@@ -1,0 +1,20 @@
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+
+      - name: SSH to EC2 and deploy
+      
+          run: docker pull 316usman/flask-app:latest
+          run: docker stop flask-container || true
+          run: docker rm flask-container || true
+          run: docker run -d -p 4000:4000 --name flask-container 316usman/flask-app:latest
