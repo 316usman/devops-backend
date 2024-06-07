@@ -35,6 +35,8 @@ CREATE TABLE IF NOT EXISTS data (
     input3 VARCHAR(255)
 )
 """
+cursor.execute(create_table_query)
+
 
 try:
     # Execute the SQL query to create the table
