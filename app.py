@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 app = Flask(__name__)
 
+
 # Load environment variables from .env file
 load_dotenv()
 
