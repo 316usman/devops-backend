@@ -4,6 +4,8 @@ import os
 
 app = Flask(__name__)
 
+
+
 # Configuration
 DB_USERNAME = os.environ.get('DB_USERNAME', 'default_username')
 DB_PASSWORD = os.environ.get('DB_PASSWORD', 'default_password')
