@@ -13,11 +13,11 @@ jobs:
     runs-on: self-hosted
 
     steps:
-    - name: Pull Docker image
-      run: sudo docker pull 316usman/flask-app:latest
     - name: Stop Old Container if running
       run: sudo docker stop flask-container || true
     - name: Delete Old docker container
       run: sudo docker rm flask-container || true
+    - name: Pull Docker image
+      run: sudo docker pull 316usman/flask-app:latest
     - name: Run Docker Container
       run: sudo docker run -d -p 4000:4000 --name flask-container 316usman/flask-app:latest
