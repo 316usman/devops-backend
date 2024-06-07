@@ -1,10 +1,9 @@
 from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+import pymysql
 import os
 from dotenv import load_dotenv
 
 app = Flask(__name__)
-
 
 # Load environment variables from .env file
 load_dotenv()
@@ -15,20 +14,21 @@ DB_PASSWORD = os.getenv('DB_PASSWORD', 'default_password')
 DB_HOST = os.getenv('DB_HOST', 'default_host')
 DB_NAME = os.getenv('DB_NAME', 'default_dbname')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# Connect to the database
+connection = pymysql.connect(
+    host=DB_HOST,
+    user=DB_USERNAME,
+    password=DB_PASSWORD,
+    database=DB_NAME,
+    port=3306
+)
 
+# Create a cursor object to execute SQL queries
+cursor = connection.cursor()
 
-db = SQLAlchemy(app)
-
-class Data(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    input1 = db.Column(db.String(100), nullable=False)
-    input2 = db.Column(db.String(100), nullable=False)
-    input3 = db.Column(db.String(100), nullable=True)
-
-@app.route('/submit', methods=['POST'])
-def submit():
+# Route to add data
+@app.route('/add_data', methods=['POST'])
+def add_data():
     data = request.json
     input1 = data.get('input1')
     input2 = data.get('input2')
@@ -37,13 +37,16 @@ def submit():
     if not input1 or not input2:
         return jsonify({"error": "input1 and input2 are required"}), 400
 
-    new_data = Data(input1=input1, input2=input2, input3=input3)
-    db.session.add(new_data)
-    db.session.commit()
-
-    return jsonify({"message": "Data saved successfully"}), 201
+    try:
+        # Execute the SQL query to insert data into the database
+        query = "INSERT INTO data (input1, input2, input3) VALUES (%s, %s, %s)"
+        cursor.execute(query, (input1, input2, input3))
+        connection.commit()
+        return jsonify({"message": "Data added successfully"}), 201
+    except Exception as e:
+        # If an error occurs, rollback the transaction and return an error response
+        connection.rollback()
+        return jsonify({"error": f"Failed to add data: {str(e)}"}), 500
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(host='0.0.0.0', port=4000)
