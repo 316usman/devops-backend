@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS data (
     input1 VARCHAR(255) NOT NULL,
     input2 VARCHAR(255) NOT NULL,
     input3 VARCHAR(255)
-)
+);
 """
 cursor.execute(create_table_query)
 
