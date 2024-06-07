@@ -27,6 +27,25 @@ connection = pymysql.connect(
 # Create a cursor object to execute SQL queries
 cursor = connection.cursor()
 
+create_table_query = """
+CREATE TABLE IF NOT EXISTS data (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    input1 VARCHAR(255) NOT NULL,
+    input2 VARCHAR(255) NOT NULL,
+    input3 VARCHAR(255)
+)
+"""
+
+try:
+    # Execute the SQL query to create the table
+    cursor.execute(create_table_query)
+    connection.commit()
+    print("Table 'data' created successfully or already exists.")
+except Exception as e:
+    # If an error occurs, rollback the transaction and print an error message
+    connection.rollback()
+    print(f"Failed to create table 'data': {str(e)}")
+
 # Route to add data
 @app.route('/add_data', methods=['POST'])
 def add_data():
