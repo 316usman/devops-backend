@@ -1,16 +1,19 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 
 
+# Load environment variables from .env file
+load_dotenv()
 
 # Configuration
-DB_USERNAME = os.environ.get('DB_USERNAME', 'default_username')
-DB_PASSWORD = os.environ.get('DB_PASSWORD', 'default_password')
-DB_HOST = os.environ.get('DB_HOST', 'default_host')
-DB_NAME = os.environ.get('DB_NAME', 'default_dbname')
+DB_USERNAME = os.getenv('DB_USERNAME', 'default_username')
+DB_PASSWORD = os.getenv('DB_PASSWORD', 'default_password')
+DB_HOST = os.getenv('DB_HOST', 'default_host')
+DB_NAME = os.getenv('DB_NAME', 'default_dbname')
 
 app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{DB_USERNAME}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
