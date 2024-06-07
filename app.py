@@ -37,7 +37,6 @@ CREATE TABLE IF NOT EXISTS data (
 """
 cursor.execute(create_table_query)
 
-
 try:
     # Execute the SQL query to create the table
     cursor.execute(create_table_query)
