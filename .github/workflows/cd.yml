@@ -18,7 +18,7 @@ jobs:
     - name: Delete Old docker container
       run: sudo docker rm flask-container || true
     - name: Delete Old docker Image
-      run: sudo docker rmi flask-container || true
+      run: sudo docker rmi || true
     - name: Pull Docker image
       run: sudo docker pull 316usman/flask-app:latest
     - name: Run Docker Container
