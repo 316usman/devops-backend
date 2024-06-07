@@ -1,10 +1,11 @@
 from flask import Flask, request, jsonify
 import pymysql
 import os
+from flask_cors import CORS
 from dotenv import load_dotenv
 
 app = Flask(__name__)
-
+CORS(app, origins=['http://52.91.225.212'])
 
 # Load environment variables from .env file
 load_dotenv()
