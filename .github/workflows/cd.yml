@@ -22,7 +22,7 @@ jobs:
 
     - name: SSH to EC2 Instance and Run Docker Commands
       run: |
-        ssh -o StrictHostKeyChecking=no -i $RUNNER_TEMP/.ssh/devops-backend.pem ubuntu@10.0.5.211 << 'EOF'
+        ssh -o StrictHostKeyChecking=no -i $RUNNER_TEMP/.ssh/devops-backend.pem ubuntu@34.203.38.139 << 'EOF'
           sudo docker stop flask-container || true
           sudo docker rm flask-container || true
           sudo docker rmi $(sudo docker images -q) || true
