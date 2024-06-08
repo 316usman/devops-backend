@@ -5,7 +5,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 
 app = Flask(__name__)
-CORS(app, origins=['http://52.91.225.212'])
+CORS(app, origins=['http://54.198.211.51'])
 
 # Load environment variables from .env file
 load_dotenv()
@@ -48,6 +48,9 @@ except Exception as e:
     connection.rollback()
     print(f"Failed to create table 'data': {str(e)}")
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "API is working"}), 200
 # Route to add data
 @app.route('/add_data', methods=['POST'])
 def add_data():
