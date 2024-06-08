@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 app = Flask(__name__)
 
 #CORS(app, origins=['http://10.0.4.101', 'http://10.0.5.211'])
-CORS(app, resources={r"/*": {"origins": "http://10.0.4.101"}})
+CORS(app, resources={r"/*": {"origins": "http://frontend.azeemahmed.online/"}})
 
 # Load environment variables from .env file
 load_dotenv()
