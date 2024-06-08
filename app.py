@@ -28,6 +28,7 @@ connection = pymysql.connect(
 # Create a cursor object to execute SQL queries
 cursor = connection.cursor()
 
+
 create_table_query = """
 CREATE TABLE IF NOT EXISTS data (
     id INT AUTO_INCREMENT PRIMARY KEY,
